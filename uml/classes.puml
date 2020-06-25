@@ -1,0 +1,84 @@
+@startuml quizr
+
+
+class Tag << (S,#cccccc) Struct >>
+class Tag {
+    - string name
+}
+
+interface Test {
+    + {abstract} TestResult getResult()
+    + {abstract} TestDifficulty getDifficulty()
+    + {abstract} int getAttempts()
+    + {abstract} int setAttempts()
+}
+
+Test "1" *-- "1" TestDifficulty : contains
+enum TestDifficulty {
+    EASY
+    MODERATE
+    HARD
+}
+
+Test "1" *-- "1" TestResult : contains
+enum TestResult {
+    FAILED
+    PASSED
+}
+
+abstract TestCase {
+    + {abstract} void setQuestion()
+    + {abstract} string getQuestion()
+    + {abstract} bool Evaluate()
+    + {abstract} TestType getType()
+    + {abstract} Tag getTags() 
+}
+
+TestCase "1" *-- "1" TestType : contains
+TestCase "many" *-- "many" Tag :  contains
+
+TestCase <|.. Test
+
+enum TestType {
+    MULTIPLE_CHOICE
+    SHORT_ANSWER
+    TRUE_FALSE
+}
+
+class MultipleChoice {
+    - Answer key
+}
+MultipleChoice <|..TestCase
+MultipleChoice "many" *-- "many" Answer : contains
+
+class ShortAnswer {
+
+}
+ShortAnswer<|..TestCase
+ShortAnswer "1" *-- "many" Answer : contains
+
+class TrueFalse {
+
+}
+TrueFalse<|..TestCase
+TrueFalse "1" *-- "1" Answer : contains
+
+abstract Exam {
+    + {abstract} int Score()
+}
+Exam <|.. Test
+
+class QuestionSet<T> {
+
+}
+
+QuestionSet "1" *-- "many" TrueFalse: contains
+QuestionSet "1" *-- "many" ShortAnswer: contains
+QuestionSet "1" *-- "many" MultipleChoice: contains
+QuestionSet <|.. Exam
+
+abstract class Answer<T> {
+
+}
+
+@enduml
