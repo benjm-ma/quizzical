@@ -6,6 +6,7 @@ namespace quizzical
     {
         public enum TestType {
             MULTIPLE_CHOICE,
+            MULTIPLE_SELECTION,
             SHORT_ANSWER,
             TRUE_FALSE
         }
