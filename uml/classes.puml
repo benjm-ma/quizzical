@@ -3,25 +3,40 @@
 
 class Tag << (S,#cccccc) Struct >>
 class Tag {
-    - string name
+    - name : string
 }
 
-interface Test {
-    + {abstract} TestResult getResult()
-    + {abstract} TestDifficulty getDifficulty()
-    + {abstract} int getAttempts()
-    + {abstract} int setAttempts()
+class Ratio << (S,#cccccc) Struct >>
+class Ratio {
+    - antecedent : int
+    - consequent : int
+    + ToString() : string
+    + {static} Normalize(r:Ratio) : Ratio
+    + setAntecedent (a:int) : void
+    + setConsequent (c:int) : void
+    + getConsequent () : int
+    + getAntecedent () : int
 }
 
-Test "1" *-- "1" TestDifficulty : contains
-enum TestDifficulty {
+Measurable *-- Ratio
+interface Measurable {
+    + {abstract} getResult() : Result
+    + {abstract} getDifficulty() : Difficulty
+    + {abstract} getAttempts() : int
+    + {abstract} setAttempts() : int
+    + {abstract} getSuccessRate() : Ratio
+    + {abstract} setSuccessRate() : Ratio
+}
+
+Measurable "1" *-- "1" Difficulty : contains
+enum Difficulty {
     EASY
     MODERATE
     HARD
 }
 
-Test "1" *-- "1" TestResult : contains
-enum TestResult {
+Measurable "1" *-- "1" Result : contains
+enum Result {
     FAILED
     PASSED
     UNATTEMPTED
@@ -34,7 +49,7 @@ interface Catagorizable {
     + {abstract} getTags() : Tag
 }
 
-Question <|.. Test
+Question <|.. Measurable
 abstract Question <T> {
     + {abstract} setQuestion() : void
     + {abstract} getQuestion() : string
@@ -61,9 +76,9 @@ class TrueFalse {
 
 }
 
-TestCase <|.. Catagorizable
-TestCase <|.. Test
-abstract TestCase {
+Test <|.. Catagorizable
+Test <|.. Measurable
+abstract Test {
     + {abstract} int Score()
 }
 
@@ -74,7 +89,7 @@ class QuestionSet<T> {
 QuestionSet "1" *-- "many" TrueFalse: contains
 QuestionSet "1" *-- "many" ShortAnswer: contains
 QuestionSet "1" *-- "many" MultipleChoice: contains
-QuestionSet <|.. Exam
+QuestionSet <|.. Test
 
 Question *-- Answer
 Answer <|.. Catagorizable
