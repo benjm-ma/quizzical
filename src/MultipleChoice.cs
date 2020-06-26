@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 namespace quizzical
 {
-    class ShortAnswer : Question<string>
+    class MultipleChoice: Question<char>
     {
-        public override Answer<string> Solution {get;set;}
+        public override Answer<char> Solution {get;set;}
 
         public override int Attempts {get;set;}
 
@@ -16,9 +16,9 @@ namespace quizzical
 
         public override Catagorizable.TestType Type {get;}
 
-        public override bool Evaluate(string attempt)
+        public override bool Evaluate(char attempt)
         {
-            return false;
+            return Solution.Value == attempt;
         }
     }
 }
