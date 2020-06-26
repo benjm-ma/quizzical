@@ -39,6 +39,7 @@ abstract Question <T> {
     + {abstract} getQuestion() : string
     + {abstract} getAnswer() : T
     + {abstract} setAnswer (value:T) : void
+    + {abstract} checkAnswer (T attempt) : void
 }
 
 
@@ -79,7 +80,10 @@ Answer <|.. Catagorizable
 class Answer<T> {
     - value : T
     - type : TestType
-    + Evaluate (attempt:T) : boolean
+    + {static} Evaluate (solution:Answer<string>, attempt:T) : boolean
+    + {static} Evaluate (solution:Answer<bool>, attempt:T) : boolean
+    + {static} Evaluate (solution:Answer<int>, attempt:T) : boolean
+    + {static} Evaluate (solution:Answer<int[]>, attempt:T) : boolean
     --
     + getValue () : T
     + getType () : TestType
