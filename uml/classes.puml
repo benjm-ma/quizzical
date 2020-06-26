@@ -24,6 +24,7 @@ Test "1" *-- "1" TestResult : contains
 enum TestResult {
     FAILED
     PASSED
+    UNATTEMPTED
 }
 
 Catagorizable "1" *-- "1" TestType : contains
@@ -60,9 +61,9 @@ class TrueFalse {
 
 }
 
-Exam <|.. Catagorizable
-Exam <|.. Test
-abstract Exam {
+TestCase <|.. Catagorizable
+TestCase <|.. Test
+abstract TestCase {
     + {abstract} int Score()
 }
 
