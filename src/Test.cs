@@ -10,7 +10,8 @@ namespace quizzical
 
         public enum TestResult {
             FAILED,
-            PASSED
+            PASSED,
+            UNATTEMPTED
         }
 
         public abstract TestResult Result {get;set;} 

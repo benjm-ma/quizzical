@@ -12,7 +12,8 @@ namespace quizzical
 
         public override Test.TestDifficulty Difficulty {get;set;}
 
-        public override Test.TestResult Result {get;set;}
+        public override Test.TestResult Result {get;set;} 
+            = Test.TestResult.UNATTEMPTED;
 
         public override Catagorizable.TestType Type {get;}
             = Catagorizable.TestType.TRUE_FALSE;

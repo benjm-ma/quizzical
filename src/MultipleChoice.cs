@@ -6,13 +6,14 @@ namespace quizzical
     {
         public override Answer<int> Solution {get;set;}
 
-        public override int Attempts {get;set;}
+        public override int Attempts {get;set;} = 0;
 
         public override List<Tag> Tags {get;set;}
 
         public override Test.TestDifficulty Difficulty {get;set;}
 
         public override Test.TestResult Result {get;set;}
+            = Test.TestResult.UNATTEMPTED;
 
         public override Catagorizable.TestType Type {get;} 
             = Catagorizable.TestType.MULTIPLE_CHOICE;
