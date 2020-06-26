@@ -10,10 +10,12 @@ namespace quizzical
 
         public override List<Tag> Tags {get;set;}
 
-        public override Test.TestDifficulty Difficulty {get;set;}
+        public override Measurable.Difficulty Hardness {get;set;}
 
-        public override Test.TestResult Result {get;set;} 
-            = Test.TestResult.UNATTEMPTED;
+        public override Ratio SuccessRate {get;set;}
+
+        public override Measurable.Outcome Result {get;set;} 
+            = Measurable.Outcome.UNATTEMPTED;
 
         public override Catagorizable.TestType Type {get;}
             = Catagorizable.TestType.TRUE_FALSE;
@@ -21,9 +23,9 @@ namespace quizzical
         public override void CheckAnswer (bool attempt)
         {
             if (Answer<bool>.Evaluate(this.Solution, attempt))
-                this.Result = Test.TestResult.PASSED;
+                this.Result = Measurable.Outcome.PASSED;
             else
-                this.Result = Test.TestResult.FAILED;
+                this.Result = Measurable.Outcome.FAILED;
         }
     }
 }

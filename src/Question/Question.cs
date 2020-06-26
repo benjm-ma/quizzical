@@ -2,14 +2,16 @@ using System.Collections.Generic;
 
 namespace quizzical
 {
-    abstract class Question<T> : Test, Catagorizable
+    abstract class Question<T> : Measurable, Catagorizable
     {
 
         public abstract Answer<T> Solution {get;set;}
 
-        public abstract Test.TestResult Result {get;set;}
+        public abstract Measurable.Outcome Result {get;set;}
 
-        public abstract Test.TestDifficulty Difficulty {get;set;}
+        public abstract Measurable.Difficulty Hardness {get;set;}
+
+        public abstract Ratio SuccessRate {get;set;}
 
         public abstract Catagorizable.TestType Type {get;}
 
