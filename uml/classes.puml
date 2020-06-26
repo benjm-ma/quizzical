@@ -26,47 +26,44 @@ enum TestResult {
     PASSED
 }
 
-abstract TestCase {
-    + {abstract} void setQuestion()
-    + {abstract} string getQuestion()
-    + {abstract} bool Evaluate()
-    + {abstract} TestType getType()
-    + {abstract} Tag getTags() 
+Catagorizable "1" *-- "1" TestType : contains
+Catagorizable "many" *-- "many" Tag :  contains
+interface Catagorizable {
+    + {abstract} getType() : TestType
+    + {abstract} getTags() : Tag
 }
 
-TestCase "1" *-- "1" TestType : contains
-TestCase "many" *-- "many" Tag :  contains
+Question <|.. Test
+abstract Question <T> {
+    + {abstract} setQuestion() : void
+    + {abstract} getQuestion() : string
+    + {abstract} getAnswer() : T
+    + {abstract} setAnswer (value:T) : void
+}
 
-TestCase <|.. Test
 
 enum TestType {
     MULTIPLE_CHOICE
     SHORT_ANSWER
     TRUE_FALSE
 }
-
-class MultipleChoice {
-    - Answer key
-}
-MultipleChoice <|..TestCase
-MultipleChoice "many" *-- "many" Answer : contains
+Question       <|..Catagorizable
+MultipleChoice <|--Question
+ShortAnswer    <|--Question
+TrueFalse      <|--Question
 
 class ShortAnswer {
 
 }
-ShortAnswer<|..TestCase
-ShortAnswer "1" *-- "many" Answer : contains
-
 class TrueFalse {
 
 }
-TrueFalse<|..TestCase
-TrueFalse "1" *-- "1" Answer : contains
 
+Exam <|.. Catagorizable
+Exam <|.. Test
 abstract Exam {
     + {abstract} int Score()
 }
-Exam <|.. Test
 
 class QuestionSet<T> {
 
@@ -77,8 +74,17 @@ QuestionSet "1" *-- "many" ShortAnswer: contains
 QuestionSet "1" *-- "many" MultipleChoice: contains
 QuestionSet <|.. Exam
 
-abstract class Answer<T> {
-
+Question *-- Answer
+Answer <|.. Catagorizable
+class Answer<T> {
+    - value : T
+    - type : TestType
+    + Evaluate (attempt:T) : boolean
+    --
+    + getValue () : T
+    + getType () : TestType
+    + setType () : TestType
+    + setValue (value:T) : void
 }
 
 @enduml
