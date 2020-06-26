@@ -4,6 +4,7 @@ namespace quizzical
 {
     class ShortAnswer : Question<string>
     {
+
         public override Answer<string> Solution {get;set;}
 
         public override int Attempts {get;set;}
@@ -15,10 +16,14 @@ namespace quizzical
         public override Test.TestResult Result {get;set;}
 
         public override Catagorizable.TestType Type {get;}
+            = Catagorizable.TestType.SHORT_ANSWER;
 
-        public override bool Evaluate(string attempt)
+        public override void CheckAnswer (string attempt)
         {
-            return false;
+            if (Answer<string>.Evaluate (this.Solution, attempt))
+                this.Result = Test.TestResult.PASSED;
+            else
+                this.Result = Test.TestResult.FAILED;
         }
     }
 }

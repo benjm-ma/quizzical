@@ -18,9 +18,12 @@ namespace quizzical
         public override Catagorizable.TestType Type {get;}
             = Catagorizable.TestType.MULTIPLE_SELECTION;
 
-        public override bool Evaluate(int[] attempt)
+        public override void CheckAnswer(int[] attempt)
         {
-            return false;
+            if (Answer<int[]>.Evaluate(this.Solution, attempt))
+                this.Result = Test.TestResult.PASSED;
+            else
+                this.Result = Test.TestResult.FAILED;
         }
     }
 }

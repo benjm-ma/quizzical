@@ -4,6 +4,7 @@ namespace quizzical
 {
     abstract class Question<T> : Test, Catagorizable
     {
+
         public abstract Answer<T> Solution {get;set;}
 
         public abstract Test.TestResult Result {get;set;}
@@ -16,7 +17,7 @@ namespace quizzical
 
         public abstract List<Tag> Tags {get;set;}
 
-        public abstract bool Evaluate (T attempt);
+        public abstract void CheckAnswer (T attempt);
 
     }
 }

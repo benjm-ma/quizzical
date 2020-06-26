@@ -15,10 +15,14 @@ namespace quizzical
         public override Test.TestResult Result {get;set;}
 
         public override Catagorizable.TestType Type {get;}
+            = Catagorizable.TestType.TRUE_FALSE;
 
-        public override bool Evaluate(bool attempt)
+        public override void CheckAnswer (bool attempt)
         {
-            return Solution.Value == attempt;
+            if (Answer<bool>.Evaluate(this.Solution, attempt))
+                this.Result = Test.TestResult.PASSED;
+            else
+                this.Result = Test.TestResult.FAILED;
         }
     }
 }
