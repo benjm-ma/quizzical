@@ -42,64 +42,67 @@ enum Result {
     UNATTEMPTED
 }
 
-Catagorizable "1" *-- "1" TestType : contains
 Catagorizable "many" *-- "many" Tag :  contains
 interface Catagorizable {
     + {abstract} getType() : TestType
     + {abstract} getTags() : Tag
 }
 
-Question <|.. Measurable
-abstract Question <T> {
-    + {abstract} setQuestion() : void
-    + {abstract} getQuestion() : string
-    + {abstract} getAnswer() : T
-    + {abstract} setAnswer (value:T) : void
-    + {abstract} checkAnswer (T attempt) : void
-}
-
-
+Catagorizable "1" *-- "1" TestType : contains
 enum TestType {
     MULTIPLE_CHOICE
     SHORT_ANSWER
     TRUE_FALSE
 }
-Question       <|..Catagorizable
-MultipleChoice <|--Question
-ShortAnswer    <|--Question
-TrueFalse      <|--Question
 
-class ShortAnswer {
-
+Question <|..Catagorizable
+Question <|.. Measurable
+Question *-- Answer
+abstract Question <T> {
+    + {abstract} setQuestion() : void
+    + {abstract} getQuestion() : string
+    + {abstract} getAnswer() : T
+    + {abstract} setAnswer (value:T) : void
 }
-class TrueFalse {
 
+CheckableQuestion <|-- Question
+class CheckableQuestion <T> {
+    + checkAnswer (attempt:T) : bool
 }
+
+
+MultipleChoice    <|--CheckableQuestion
+MultipleSelection <|--CheckableQuestion
+ShortAnswer       <|--CheckableQuestion
+TrueFalse         <|--CheckableQuestion
+class ShortAnswer { }
+class TrueFalse { }
 
 Test <|.. Catagorizable
 Test <|.. Measurable
 abstract Test {
-    + {abstract} int Score()
+    - score : int
+    ..Getters & Setters..
+    + {abstract} getScore() : int
+    + {abstract} setScore(value:int)
 }
 
-class QuestionSet<T> {
-
-}
 
 QuestionSet "1" *-- "many" TrueFalse: contains
 QuestionSet "1" *-- "many" ShortAnswer: contains
 QuestionSet "1" *-- "many" MultipleChoice: contains
+QuestionSet "1" *-- "many" MultipleSelection: contains
 QuestionSet <|.. Test
+class QuestionSet<T> { }
 
-Question *-- Answer
 Answer <|.. Catagorizable
 class Answer<T> {
     - value : T
     - type : TestType
-    + {static} Evaluate (solution:Answer<string>, attempt:T) : boolean
-    + {static} Evaluate (solution:Answer<bool>, attempt:T) : boolean
-    + {static} Evaluate (solution:Answer<int>, attempt:T) : boolean
-    + {static} Evaluate (solution:Answer<int[]>, attempt:T) : boolean
+    + {static} Evaluate (solution:Answer<string>, attempt:string) : boolean
+    + {static} Evaluate (solution:Answer<bool>, attempt:bool) : boolean
+    + {static} Evaluate (solution:Answer<int>, attempt:int) : boolean
+    + {static} Evaluate (solution:Answer<int[]>, attempt:int[]) : boolean
     --
     + getValue () : T
     + getType () : TestType
