@@ -3,30 +3,15 @@ using System.Collections.Generic;
 
 namespace quizzical
 {
-    class MultipleSelection: Question<int[]>
+    class MultipleSelection: CheckableQuestion<int[]>
     {
-        public override Answer<int[]> Solution {get;set;}
-
-        public override int Attempts {get;set;} = 0;
-
-        public override List<Tag> Tags {get;set;}
-
-        public override Measurable.Difficulty Hardness {get;set;}
-
-        public override Measurable.Outcome Result {get;set;}
-            = Measurable.Outcome.UNATTEMPTED;
-        
-        public override Ratio SuccessRate {get;set;}
-
         public override Catagorizable.TestType Type {get;}
             = Catagorizable.TestType.MULTIPLE_SELECTION;
 
-        public override void CheckAnswer(int[] attempt)
-        {
-            if (Answer<int[]>.Evaluate(this.Solution, attempt))
-                this.Result = Measurable.Outcome.PASSED;
-            else
-                this.Result = Measurable.Outcome.FAILED;
-        }
+        public MultipleSelection (int[] answer, int attempts, List<Tag> tags, 
+            Measurable.Difficulty hardness, Ratio successRate, 
+            Measurable.Outcome result ): 
+            base (answer, attempts, tags, hardness, successRate, result) { }
+
     }
 }
