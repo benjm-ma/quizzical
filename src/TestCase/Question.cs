@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 
-namespace quizzical
+using Quizzical.Metrics;
+using Quizzical.Filter;
+
+namespace Quizzical.TestCase
 {
     abstract class Question<T> : Measurable, Catagorizable
     {

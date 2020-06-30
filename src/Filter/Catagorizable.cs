@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace quizzical
+namespace Quizzical.Filter
 {
     interface Catagorizable 
     {

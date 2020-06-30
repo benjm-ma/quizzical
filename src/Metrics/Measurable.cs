@@ -1,4 +1,4 @@
-namespace quizzical
+namespace Quizzical.Metrics
 {
     interface Measurable 
     {

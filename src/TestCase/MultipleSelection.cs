@@ -1,7 +1,10 @@
 
 using System.Collections.Generic;
 
-namespace quizzical
+using Quizzical.Metrics;
+using Quizzical.Filter;
+
+namespace Quizzical.TestCase
 {
     class MultipleSelection: CheckableQuestion<int[]>
     {

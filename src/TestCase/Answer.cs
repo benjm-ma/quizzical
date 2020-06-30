@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace quizzical
+using Quizzical.Filter;
+
+namespace Quizzical.TestCase
 {
     /// <summary>
     ///

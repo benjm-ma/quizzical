@@ -1,4 +1,4 @@
-namespace quizzical
+namespace Quizzical.Filter
 {
     public struct Tag
     {
