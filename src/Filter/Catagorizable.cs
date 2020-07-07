@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Quizzical.Filter
 {
-    interface Catagorizable 
+    public interface Catagorizable 
     {
         public enum TestType {
             MULTIPLE_CHOICE,
