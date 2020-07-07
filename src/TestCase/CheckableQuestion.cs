@@ -40,10 +40,15 @@ namespace Quizzical.TestCase
 
         public override void CheckAnswer (T attempt)
         {
-            if (Answer<T>.Evaluate (Solution, attempt))
+            if (Answer<T>.Evaluate (Solution, attempt)){
                 this.Result = Measurable.Outcome.PASSED;
-            else
+                
+            } else {
                 this.Result = Measurable.Outcome.FAILED;
+            }
+
+            Attempts++;
+
         }
 
 
