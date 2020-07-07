@@ -8,7 +8,7 @@ namespace Quizzical.TestCase
     /// <summary>
     ///
     /// </summary>
-    class Answer<T> : Catagorizable
+    public class Answer<T> : Catagorizable
     {
         /// <summary>
         ///
@@ -34,13 +34,13 @@ namespace Quizzical.TestCase
         /// <summary>
         ///
         /// </summary>
-        public static bool Evaluate (Answer<int[]> solution, int[] attempt)
+        public static bool Evaluate (Answer<T[]> solution, T[] attempt)
         {
             // Check each element in attempt and see if it exists within
             // the solution array
-            return Array.TrueForAll (attempt, (int attemptValue) => {
-                foreach (int solutionValue in solution.Value) 
-                    if (solutionValue == attemptValue) return true;
+            return Array.TrueForAll (attempt, (T attemptValue) => {
+                foreach (T solutionValue in solution.Value) 
+                    if (solutionValue.Equals (attemptValue)) return true;
                 return false;
             });
         }
@@ -49,8 +49,8 @@ namespace Quizzical.TestCase
 
         public Answer (T value) { this.Value = value; }
 
-        public static Answer<int[]> CreateAnswer (int[] value) {
-            Answer<int[]> answer = new Answer<int[]>();
+        public static Answer<T[]> CreateAnswer (T[] value) {
+            Answer<T[]> answer = new Answer<T[]>();
 
             Array.Copy (value, answer.Value, value.Length);
 
