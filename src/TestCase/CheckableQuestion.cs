@@ -48,7 +48,6 @@ namespace Quizzical.TestCase
             }
 
             Attempts++;
-
         }
 
 

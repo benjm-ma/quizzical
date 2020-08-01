@@ -49,7 +49,7 @@ namespace Quizzical.TestCase
 
         public Answer (T value) { this.Value = value; }
 
-        public static Answer<T[]> CreateAnswer (T[] value) {
+        public static Answer<T[]> CreateAnswerSet (T[] value) {
             Answer<T[]> answer = new Answer<T[]>();
 
             Array.Copy (value, answer.Value, value.Length);
