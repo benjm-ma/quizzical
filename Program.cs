@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace quizr
+namespace quizzical
 {
     class Program
     {
