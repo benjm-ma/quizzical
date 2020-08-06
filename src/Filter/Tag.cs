@@ -1,7 +1,12 @@
 namespace Quizzical.Filter
 {
-    public struct Tag
+    public readonly struct Tag
     {
-        public string TagName {get;set;}
+        public string TagName {get;}
+
+        public Tag (string tagName) {
+            TagName = tagName;
+        }
+
     }
 }

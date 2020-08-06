@@ -11,8 +11,8 @@ namespace Quizzical.Filter
             TRUE_FALSE
         }
 
-        public abstract List<Tag> Tags {get;set;}
+        List<Tag> Tags {get;set;}
 
-        public abstract TestType Type {get;}
+        TestType Type {get;}
     }
 }
